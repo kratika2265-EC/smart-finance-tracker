@@ -1,101 +1,51 @@
-/* ===== Global ===== */
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #f4f6fb;
-    margin: 0;
-    padding: 0;
-    color: #2d3436;
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#6a5acd,#4facfe);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0;
 }
 
-.container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+.login-container{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* ===== Headings ===== */
-h1 {
-    text-align: center;
-    color: #6c5ce7;
-    margin-bottom: 10px;
+h1{
+    color:#6a5acd;
+    margin-bottom:10px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #636e72;
-    margin-bottom: 30px;
+p{
+    color:gray;
+    margin-bottom:25px;
 }
 
-/* ===== Cards ===== */
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
+input{
+    width:100%;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    margin-bottom:15px;
 }
 
-/* ===== Stats ===== */
-.stats {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 15px;
+button{
+    width:100%;
+    padding:12px;
+    background:#6a5acd;
+    border:none;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
 }
 
-.stat {
-    flex: 1;
-    background: #f1f2ff;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.stat h3 {
-    margin: 0;
-    font-size: 14px;
-    color: #636e72;
-}
-
-.stat p {
-    margin-top: 6px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.income { color: #00b894; }
-.expense { color: #d63031; }
-.balance { color: #6c5ce7; }
-
-/* ===== Buttons ===== */
-.actions {
-    margin: 20px 0;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 18px;
-    margin: 6px 6px 6px 0;
-    background: #6c5ce7;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.button:hover {
-    background: #574bdb;
-}
-
-/* ===== List ===== */
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    padding: 10px 6px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
+button:hover{
+    background:#5846c2;
 }
