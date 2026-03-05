@@ -1,0 +1,101 @@
+/* ===== Global ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+    color: #2d3436;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* ===== Headings ===== */
+h1 {
+    text-align: center;
+    color: #6c5ce7;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #636e72;
+    margin-bottom: 30px;
+}
+
+/* ===== Cards ===== */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+/* ===== Stats ===== */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat {
+    flex: 1;
+    background: #f1f2ff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #636e72;
+}
+
+.stat p {
+    margin-top: 6px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.income { color: #00b894; }
+.expense { color: #d63031; }
+.balance { color: #6c5ce7; }
+
+/* ===== Buttons ===== */
+.actions {
+    margin: 20px 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 18px;
+    margin: 6px 6px 6px 0;
+    background: #6c5ce7;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.button:hover {
+    background: #574bdb;
+}
+
+/* ===== List ===== */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 10px 6px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}

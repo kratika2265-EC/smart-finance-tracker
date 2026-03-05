@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Finance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Smart Finance ✦</h1>
+    <p class="subtitle">Track • Save • Grow</p>
+
+    <div class="card">
+        <h2 class="balance">Balance: ₹{{ b }}</h2>
+
+        <div class="stats">
+            <div class="stat">
+                <h3>Income</h3>
+                <p class="income">₹{{ i }}</p>
+            </div>
+
+            <div class="stat">
+                <h3>Expense</h3>
+                <p class="expense">₹{{ e }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Recent Transactions</h3>
+        <ul>
+            {% for x in t %}
+            <li>
+                {{ x.date }} • {{ x.category }} •
+                {% if x.type == "income" %}+{% else %}-{% endif %}
+                ₹{{ x.amount }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="actions">
+        <a href="/income" class="button">➕ Add Income</a>
+        <a href="/expense" class="button">➖ Add Expense</a>
+        <a href="/budget" class="button">🎯 Set Budget</a>
+    </div>
+
+</div>
+
+</body>
+</html>
