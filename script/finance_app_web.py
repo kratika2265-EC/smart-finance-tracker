@@ -1,3 +1,4 @@
+```python
 from flask import Flask, render_template, request, redirect, session
 import csv
 import os
@@ -11,13 +12,13 @@ app = Flask(
 
 app.secret_key = "finance-secret"
 
-# Paths
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
+os.makedirs(DATA_DIR, exist_ok=True)
 
-# ---------------- LOGIN ----------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -29,15 +30,17 @@ def login():
         user_file = os.path.join(DATA_DIR, f"{username}.csv")
 
         if not os.path.exists(user_file):
+
             with open(user_file, "w", newline="") as f:
-                csv.writer(f).writerow(["date","type","category","amount"])
+
+                writer = csv.writer(f)
+                writer.writerow(["date", "type", "category", "amount"])
 
         return redirect("/")
 
     return render_template("login.html")
 
 
-# ---------------- DASHBOARD ----------------
 @app.route("/")
 def dashboard():
 
@@ -45,6 +48,7 @@ def dashboard():
         return redirect("/login")
 
     username = session["user"]
+
     CSV_PATH = os.path.join(DATA_DIR, f"{username}.csv")
 
     transactions = []
@@ -56,15 +60,21 @@ def dashboard():
 
         with open(CSV_PATH, "r") as f:
 
-            for r in csv.DictReader(f):
+            reader = csv.DictReader(f)
+
+            for r in reader:
 
                 amt = float(r["amount"])
+
                 transactions.append(r)
 
                 if r["type"] == "income":
+
                     income += amt
                     balance += amt
+
                 else:
+
                     expense += abs(amt)
                     balance -= abs(amt)
 
@@ -78,20 +88,23 @@ def dashboard():
     )
 
 
-# ---------------- ADD INCOME ----------------
-@app.route("/income", methods=["GET","POST"])
+@app.route("/income", methods=["GET", "POST"])
 def income_page():
 
     if "user" not in session:
         return redirect("/login")
 
     username = session["user"]
+
     CSV_PATH = os.path.join(DATA_DIR, f"{username}.csv")
 
     if request.method == "POST":
 
         with open(CSV_PATH, "a", newline="") as f:
-            csv.writer(f).writerow([
+
+            writer = csv.writer(f)
+
+            writer.writerow([
                 datetime.today().strftime("%Y-%m-%d"),
                 "income",
                 request.form["category"],
@@ -103,20 +116,23 @@ def income_page():
     return render_template("add_income.html")
 
 
-# ---------------- ADD EXPENSE ----------------
-@app.route("/expense", methods=["GET","POST"])
+@app.route("/expense", methods=["GET", "POST"])
 def expense_page():
 
     if "user" not in session:
         return redirect("/login")
 
     username = session["user"]
+
     CSV_PATH = os.path.join(DATA_DIR, f"{username}.csv")
 
     if request.method == "POST":
 
         with open(CSV_PATH, "a", newline="") as f:
-            csv.writer(f).writerow([
+
+            writer = csv.writer(f)
+
+            writer.writerow([
                 datetime.today().strftime("%Y-%m-%d"),
                 "expense",
                 request.form["category"],
@@ -127,8 +143,6 @@ def expense_page():
 
     return render_template("add_expense.html")
 
-
-# ---------------- LOGOUT ----------------
 @app.route("/logout")
 def logout():
 
@@ -138,4 +152,11 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
+```
