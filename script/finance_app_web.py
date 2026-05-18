@@ -12,7 +12,6 @@ app = Flask(
 
 app.secret_key = "finance-secret"
 
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
@@ -88,6 +87,7 @@ def dashboard():
     )
 
 
+
 @app.route("/income", methods=["GET", "POST"])
 def income_page():
 
@@ -143,12 +143,15 @@ def expense_page():
 
     return render_template("add_expense.html")
 
+
+
 @app.route("/logout")
 def logout():
 
     session.pop("user", None)
 
     return redirect("/login")
+
 
 
 if __name__ == "__main__":
