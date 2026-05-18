@@ -18,12 +18,17 @@ DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
 os.makedirs(DATA_DIR, exist_ok=True)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
 
-        username = request.form["username"]
+        username = request.form["username"].strip()
+
+        if username == "":
+            return render_template("login.html")
+
         session["user"] = username
 
         user_file = os.path.join(DATA_DIR, f"{username}.csv")
@@ -63,7 +68,10 @@ def dashboard():
 
             for r in reader:
 
-                amt = float(r["amount"])
+                try:
+                    amt = float(r["amount"])
+                except:
+                    amt = 0
 
                 transactions.append(r)
 
@@ -100,6 +108,14 @@ def income_page():
 
     if request.method == "POST":
 
+        category = request.form["category"]
+        amount = request.form["amount"]
+
+        if amount == "":
+            return redirect("/income")
+
+        amount = float(amount)
+
         with open(CSV_PATH, "a", newline="") as f:
 
             writer = csv.writer(f)
@@ -107,8 +123,8 @@ def income_page():
             writer.writerow([
                 datetime.today().strftime("%Y-%m-%d"),
                 "income",
-                request.form["category"],
-                request.form["amount"]
+                category,
+                amount
             ])
 
         return redirect("/")
@@ -128,6 +144,14 @@ def expense_page():
 
     if request.method == "POST":
 
+        category = request.form["category"]
+        amount = request.form["amount"]
+
+        if amount == "":
+            return redirect("/expense")
+
+        amount = -float(amount)
+
         with open(CSV_PATH, "a", newline="") as f:
 
             writer = csv.writer(f)
@@ -135,14 +159,13 @@ def expense_page():
             writer.writerow([
                 datetime.today().strftime("%Y-%m-%d"),
                 "expense",
-                request.form["category"],
-                "-" + request.form["amount"]
+                category,
+                amount
             ])
 
         return redirect("/")
 
     return render_template("add_expense.html")
-
 
 
 @app.route("/logout")
